@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <th:replace th:fragment="common-css" th:replace="base :: common-css"></th:replace>
+  <title>Currency Trader</title>
+</head>
+<body>
+<header th:replace="base :: header"></header>
+
+<div class="p-5">
+  <h3 class="text-center m-5">Something went wrong</h3>
+</div>
+
+<footer th:replace="base :: footer"></footer>
+<th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
+</body>
+</html>

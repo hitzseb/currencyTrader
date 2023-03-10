@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:replace th:fragment="common-css" th:replace="base :: common-css"></th:replace>
+    <title>Market List</title>
+</head>
+<body>
+
+<header th:replace="base :: header"></header>
+
+<div class="container">
+    <table class="table table-striped mt-3">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Code</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="market : ${markets}">
+            <th th:text="${market.id}"></th>
+            <th th:text="${market.name}"></th>
+            <td th:text="${market.code}"></td>
+            <td th:text="${market.currency.code}"></td>
+            <td>
+                <a th:href="@{'/market/{id}/edit'(id=${market.id})}">Edit</a>
+                <a th:href="@{'/market/{id}/delete'(id=${market.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary mt-3 mb-3" href="/market/save">New Market</a>
+</div>
+
+<footer th:replace="base :: footer"></footer>
+
+<th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:replace th:fragment="common-css" th:replace="base :: common-css"></th:replace>
+    <title>Currency Trader</title>
+</head>
+<body>
+<header th:replace="base :: header"></header>
+
+<img th:src="@{/images/currencyTrader.png}" class="img-fluid w-100" alt="currency-trading">
+
+<footer th:replace="base :: footer"></footer>
+<th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
+</body>
+</html>

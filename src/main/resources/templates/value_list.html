@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:replace th:fragment="common-css" th:replace="base :: common-css"></th:replace>
+    <title>Value List</title>
+</head>
+<body>
+
+<header th:replace="base :: header"></header>
+
+<div class="container">
+    <table class="table table-striped mt-3">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Registered At</th>
+            <th scope="col">Purchase value</th>
+            <th scope="col">Sale value</th>
+            <th scope="col">Is active</th>
+            <th scope="col">Currency</th>
+            <th scope="col">Market</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="value : ${values}">
+            <th th:text="${value.id}"></th>
+            <th th:text="${value.registeredAt}"></th>
+            <th th:text="${value.purchaseValue}"></th>
+            <th th:text="${value.saleValue}"></th>
+            <th th:text="${value.isActive}"></th>
+            <th th:text="${value.currency.code}"></th>
+            <th th:text="${value.market.code}"></th>
+            <td>
+                <a th:href="@{'/value/{id}/edit'(id=${value.id})}">Edit</a>
+                <a th:href="@{'/value/{id}/delete'(id=${value.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary mt-3 mb-3" href="/value/save">New value</a>
+</div>
+
+<footer th:replace="base :: footer"></footer>
+
+<th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
+
+</body>
+</html>

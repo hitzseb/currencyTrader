@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:replace th:fragment="common-css" th:replace="base :: common-css"></th:replace>
+    <title>Currency List</title>
+</head>
+<body>
+
+<header th:replace="base :: header"></header>
+
+<div class="container">
+    <table class="table table-striped mt-3">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Code</th>
+            <th scope="col">Symbol</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="currency : ${currencies}">
+            <th th:text="${currency.id}"></th>
+            <th th:text="${currency.name}"></th>
+            <td th:text="${currency.code}"></td>
+            <td th:text="${currency.symbol}"></td>
+            <td>
+                <a th:href="@{'/currency/{id}/edit'(id=${currency.id})}">Edit</a>
+                <a th:href="@{'/currency/{id}/delete'(id=${currency.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="btn btn-primary mt-3 mb-3" href="/currency/save">New Currency</a>
+</div>
+
+<footer th:replace="base :: footer"></footer>
+
+<th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
+
+</body>
+</html>

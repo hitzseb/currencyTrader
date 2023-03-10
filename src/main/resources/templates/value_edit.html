@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <th:replace th:fragment="common-css" th:replace="base :: common-css"></th:replace>
+  <title>Edit Value</title>
+</head>
+<body>
+
+<header th:replace="base :: header"></header>
+
+<div class="container">
+  <form th:action="@{'/value/{id}/edit' (id=${value.id})}" th:object="${value}" method="post">
+    <div class="form-group">
+      <label for="registeredAt">Registered At:</label>
+      <input class="form-control" type="date" id="registeredAt" name="registeredAt" th:field="*{registeredAt}">
+    </div>
+    <div class="form-group">
+      <label for="purchaseValue">Purchase Value:</label>
+      <input class="form-control" type="number" id="purchaseValue" name="purchaseValue" th:field="*{purchaseValue}">
+    </div>
+    <div class="form-group">
+      <label for="saleValue">Sale Value:</label>
+      <input class="form-control" type="number" id="saleValue" name="saleValue" th:field="*{saleValue}">
+    </div>
+    <div class="form-group form-check">
+      <input class="form-check-input" type="checkbox" id="isActive" name="isActive" th:checked="${isActive}">
+      <label class="form-check-label" for="isActive">Is Active</label>
+    </div>
+    <div class="form-group">
+      <label for="currency">Currency:</label>
+      <select class="form-control" id="currency" name="currency.id" required>
+        <option value="">-- Select a currency --</option>
+        <th:block th:each="currency : ${currencies}">
+          <option th:value="${currency.id}" th:text="${currency.name}"></option>
+        </th:block>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="market">Market:</label>
+      <select class="form-control" id="market" name="market.id" required>
+        <option value="">-- Select a market --</option>
+        <th:block th:each="market : ${markets}">
+          <option th:value="${market.id}" th:text="${market.name}"></option>
+        </th:block>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Update value</button>
+  </form>
+</div>
+
+<footer th:replace="base :: footer"></footer>
+
+<th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
+</body>
+</html>
