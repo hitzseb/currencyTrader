@@ -12,7 +12,7 @@
 
 <div class="container-fluid">
   <div class="col-lg-3 col-sm-10 mx-auto my-5">
-  <form th:action="@{'/value/{id}/edit' (id=${value.id})}" th:object="${value}" method="post">
+  <form th:action="@{'/admin/value/{id}/edit' (id=${value.id})}" th:object="${value}" method="post">
     <div class="form-group">
       <label for="registeredAt">Registered At:</label>
       <input class="form-control" type="date" id="registeredAt" name="registeredAt" th:field="*{registeredAt}">

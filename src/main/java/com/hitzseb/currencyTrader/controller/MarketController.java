@@ -9,14 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/market")
+@RequestMapping("/admin/market")
 public class MarketController {
     @Autowired
     MarketService marketService;
     @Autowired
     CurrencyService currencyService;
 
-    @GetMapping("/all")
+    @GetMapping
     public String showAllMarkets(Model model) {
         model.addAttribute("markets", marketService.getAllMarkets());
         return "market_list";
@@ -34,7 +34,7 @@ public class MarketController {
     public String newMarket(@ModelAttribute Market market) {
         if (!marketService.marketCodeExists(market.getCode())) {
             marketService.saveMarket(market);
-            return "redirect:/market/all";
+            return "redirect:/admin/market";
         } else {
             return "market_new";
         }
@@ -60,12 +60,12 @@ public class MarketController {
             return "market_edit";
         }
         marketService.saveMarket(market);
-        return "redirect:/market/all";
+        return "redirect:/admin/market";
     }
 
     @GetMapping("/{id}/delete")
     public String deleteMarket(@PathVariable Long id) {
         marketService.deleteMarketById(id);
-        return "redirect:/market/all";
+        return "redirect:/admin/market";
     }
 }

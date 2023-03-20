@@ -10,7 +10,7 @@
 
 <header th:replace="base :: header"></header>
 
-<div class="container-fluid">
+<div class="container">
     <table class="table table-striped mt-3">
         <thead>
         <tr>
@@ -28,13 +28,13 @@
             <td th:text="${currency.code}"></td>
             <td th:text="${currency.symbol}"></td>
             <td>
-                <a th:href="@{'/currency/{id}/edit'(id=${currency.id})}">Edit</a>
-                <a th:href="@{'/currency/{id}/delete'(id=${currency.id})}">Delete</a>
+                <a th:href="@{'/admin/currency/{id}/edit'(id=${currency.id})}">Edit</a>
+                <a th:href="@{'/admin/currency/{id}/delete'(id=${currency.id})}">Delete</a>
             </td>
         </tr>
         </tbody>
     </table>
-    <a class="btn btn-primary mt-3 mb-3" href="/currency/save">New Currency</a>
+    <a class="btn btn-primary mt-3 mb-3" href="/admin/currency/save">New Currency</a>
 </div>
 
 <footer th:replace="base :: footer"></footer>

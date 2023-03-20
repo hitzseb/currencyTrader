@@ -8,13 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/currency")
+@RequestMapping("/admin/currency")
 //@RequestMapping("/admin/currency/")
 public class CurrencyController {
     @Autowired
     CurrencyService currencyService;
 
-    @GetMapping("/all")
+    @GetMapping
     public String showAllCurrencies(Model model) {
         model.addAttribute("currencies", currencyService.getAllCurrencies());
         return "currency_list";
@@ -31,7 +31,7 @@ public class CurrencyController {
     public String newCurrency(@ModelAttribute Currency currency) {
         if (!currencyService.currencyCodeExists(currency.getCode())) {
             currencyService.saveCurrency(currency);
-            return "redirect:/currency/all";
+            return "redirect:/admin/currency";
         } else {
             return "currency_new";
         }
@@ -55,12 +55,12 @@ public class CurrencyController {
             return "currency_edit";
         }
         currencyService.saveCurrency(currency);
-        return "redirect:/currency/all";
+        return "redirect:/admin/currency";
     }
 
     @GetMapping("/{id}/delete")
     public String deleteCurrency(@PathVariable Long id) {
         currencyService.deleteCurrencyById(id);
-        return "redirect:/currency/all";
+        return "redirect:/admin/currency";
     }
 }

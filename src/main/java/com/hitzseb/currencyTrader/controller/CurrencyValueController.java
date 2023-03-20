@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/value")
+@RequestMapping("/admin/value")
 public class CurrencyValueController {
     @Autowired
     CurrencyValueService currencyValueService;
@@ -22,7 +22,7 @@ public class CurrencyValueController {
     @Autowired
     MarketService marketService;
 
-    @GetMapping("/all")
+    @GetMapping
     public String showAllValues(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<CurrencyValue> currencyValues = currencyValueService.getAllCurrencyValues(page, size);
@@ -43,7 +43,7 @@ public class CurrencyValueController {
     @PostMapping("/save")
     public String newValue(@ModelAttribute CurrencyValue currencyValue) {
         currencyValueService.saveCurrencyValue(currencyValue);
-        return "redirect:/value/all";
+        return "redirect:/admin/value";
     }
 
     @GetMapping("/{id}/edit")
@@ -62,12 +62,12 @@ public class CurrencyValueController {
     @PostMapping("/{id}/save")
     public String updateValue(@PathVariable Long id, @ModelAttribute CurrencyValue currencyValue, Model model) {
         currencyValueService.saveCurrencyValue(currencyValue);
-        return "redirect:/value/all";
+        return "redirect:/admin/value";
     }
 
     @GetMapping("/{id}/delete")
     public String deleteValue(@PathVariable Long id) {
         currencyValueService.deleteCurrencyValueById(id);
-        return "redirect:/value/all";
+        return "redirect:/admin/value";
     }
 }

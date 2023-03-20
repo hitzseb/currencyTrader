@@ -15,12 +15,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         return http.csrf().disable().authorizeHttpRequests()
-                .requestMatchers("/", "/register", "/login", "/images/**",
-                        "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**",
-                        "/api/v1/exchange*", "/api/v1/variation*").permitAll()
-                .requestMatchers("/*/save", "/*/*/edit", "/*/*/delete").hasAuthority("ADMIN")
+                .requestMatchers("/", "/register", "/login", "/images/**").permitAll()
+                .requestMatchers("/admin/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
-//                .and().headers().frameOptions().sameOrigin()
                 .and().formLogin().loginPage("/login")
                 .and().build();
     }

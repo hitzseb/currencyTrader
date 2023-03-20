@@ -10,7 +10,7 @@
 
 <header th:replace="base :: header"></header>
 
-<div class="container-fluid">
+<div class="container">
     <table class="table table-striped mt-3">
         <thead>
         <tr>
@@ -34,8 +34,8 @@
             <th th:text="${value.currency.code}"></th>
             <th th:text="${value.market.code}"></th>
             <td>
-                <a th:href="@{'/value/{id}/edit'(id=${value.id})}">Edit</a>
-                <a th:href="@{'/value/{id}/delete'(id=${value.id})}">Delete</a>
+                <a th:href="@{'/admin/value/{id}/edit'(id=${value.id})}">Edit</a>
+                <a th:href="@{'/admin/value/{id}/delete'(id=${value.id})}">Delete</a>
             </td>
         </tr>
         </tbody>
@@ -44,16 +44,16 @@
     <nav th:if="${page.totalPages > 1}">
         <ul class="pagination">
             <li class="page-item" th:classappend="${page.first ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/value/all(page=${page.number - 1}, size=${page.size})}" aria-label="Previous">
+                <a class="page-link" th:href="@{/admin/value(page=${page.number - 1}, size=${page.size})}" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                 </a>
             </li>
             <li class="page-item" th:classappend="${page.number == i ? 'active' : ''}" th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
-                <a class="page-link" th:href="@{/value/all(page=${i}, size=${page.size})}" th:text="${i + 1}"></a>
+                <a class="page-link" th:href="@{/admin/value(page=${i}, size=${page.size})}" th:text="${i + 1}"></a>
             </li>
             <li class="page-item" th:classappend="${page.last ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/value/all(page=${page.number + 1}, size=${page.size})}" aria-label="Next">
+                <a class="page-link" th:href="@{/admin/value(page=${page.number + 1}, size=${page.size})}" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                 </a>
@@ -61,7 +61,7 @@
         </ul>
     </nav>
 
-    <a class="btn btn-primary mt-3 mb-3" href="/value/save">New value</a>
+    <a class="btn btn-primary mt-3 mb-3" href="/admin/value/save">New value</a>
 </div>
 
 <footer th:replace="base :: footer"></footer>
