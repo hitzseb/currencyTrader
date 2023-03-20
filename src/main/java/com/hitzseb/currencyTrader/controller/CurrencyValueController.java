@@ -1,12 +1,13 @@
 package com.hitzseb.currencyTrader.controller;
 
-import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.model.CurrencyValue;
-import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.service.CurrencyService;
 import com.hitzseb.currencyTrader.service.CurrencyValueService;
 import com.hitzseb.currencyTrader.service.MarketService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,12 @@ public class CurrencyValueController {
     MarketService marketService;
 
     @GetMapping("/all")
-    public String showAllValues(Model model) {
-        model.addAttribute("values", currencyValueService.getAllCurrencyValues());
+    public String showAllValues(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<CurrencyValue> currencyValues = currencyValueService.getAllCurrencyValues(page, size);
+        model.addAttribute("values", currencyValues.getContent());
+        model.addAttribute("page", currencyValues);
+        model.addAttribute("url", "/all");
         return "value_list";
     }
 

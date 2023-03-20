@@ -4,6 +4,8 @@ import com.hitzseb.currencyTrader.dto.CurrencyValueDto;
 import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.model.CurrencyValue;
 import com.hitzseb.currencyTrader.model.Market;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,11 +15,12 @@ import java.util.Optional;
 
 @Repository
 public interface CurrencyValueRepository extends JpaRepository<CurrencyValue, Long> {
-    public Optional<CurrencyValue> findByCurrencyAndMarketAndIsActiveIsTrue(Currency currency, Market market);
+    Page<CurrencyValue> findAll(Pageable pageable);
+    Optional<CurrencyValue> findByCurrencyAndMarketAndIsActiveIsTrue(Currency currency, Market market);
 
-    public List<CurrencyValue> findByCurrencyAndMarketAndRegisteredAtAfterOrderByRegisteredAt
+    List<CurrencyValue> findByCurrencyAndMarketAndRegisteredAtAfterOrderByRegisteredAt
             (Currency currency, Market market, LocalDate registeredAt);
 
-    public List<CurrencyValueDto> findRegisteredAtAndSaleValueByCurrencyAndMarketAndRegisteredAtAfterOrderByRegisteredAt
+    List<CurrencyValueDto> findRegisteredAtAndSaleValueByCurrencyAndMarketAndRegisteredAtAfterOrderByRegisteredAt
             (Currency currency, Market market, LocalDate registeredAt);
 }

@@ -19,8 +19,12 @@ public class ExchangeController {
     @Autowired
     ExchangeService exchangeService;
 
-    @io.swagger.v3.oas.annotations.Operation(summary = "Converts an amount of one currency to another based on" +
-            " the latest market values and returns the equivalent value in the target currency.")
+    @io.swagger.v3.oas.annotations.Operation(summary = "This API endpoint converts an amount of one currency to another based on the latest market values and returns the equivalent value in the target currency.",
+            description = "The `exchangeCurrency` API endpoint converts an amount of one currency to another based on the latest market values and returns the equivalent value in the target currency. The endpoint takes in five query parameters: `operation`, `market`, `from`, `to`, and `amount`. The `operation` parameter specifies the type of operation to be performed, which could be either \"buy\" or \"sell\". The `market` parameter specifies the market code where the conversion needs to be performed. The `from` parameter specifies the ISO code of the currency to be converted. The `to` parameter specifies the ISO code of the target currency. The `amount` parameter specifies the amount of the from currency to be converted.\n" +
+                    "\n" +
+                    "If any of the query parameters are missing, the API will return a bad request response with an appropriate message. If the API call is successful, it will return a JSON response containing the equivalent value in the target currency based on the latest market values.\n" +
+                    "\n" +
+                    "Please note that this API endpoint may throw an exception if any of the parameters are invalid or if there is an error while processing the request. In such cases, the API will return a bad request response with an appropriate message.")
     @GetMapping("/exchange")
     public ResponseEntity<?> exchangeCurrency(
             @Parameter(description = "Operation type")

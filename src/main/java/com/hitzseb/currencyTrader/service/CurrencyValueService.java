@@ -7,6 +7,9 @@ import com.hitzseb.currencyTrader.model.CurrencyValue;
 import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.repository.CurrencyValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,8 +26,9 @@ public class CurrencyValueService {
         return  currencyValueRepository.findById(id);
     }
 
-    public List<CurrencyValue> getAllCurrencyValues() {
-        return currencyValueRepository.findAll();
+    public Page<CurrencyValue> getAllCurrencyValues(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return currencyValueRepository.findAll(pageable);
     }
 
     public void saveCurrencyValue(CurrencyValue currencyValue) {

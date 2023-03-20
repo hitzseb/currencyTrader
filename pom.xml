@@ -54,6 +54,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>5.3.2</version>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
