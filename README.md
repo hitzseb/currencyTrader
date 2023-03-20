@@ -32,14 +32,19 @@ Example: [http://localhost:8080/api/v1/exchange?operation=SALE&market=ARG&from=A
 **/variation**: This endpoint accepts a currency code, a market code, and a date. It then returns the exchange rate variation for that currency in that market on the specified date, based on the values registered in the database. The returned value includes the historical records for that currency and market up to the specified date.  
 Example: [http://localhost:8080/api/v1/variation?currency=USD&market=ARG&date=2020-01-01](http://localhost:8080/api/v1/variation?currency=USD&market=ARG&date=2020-01-01)
 
+For accessing the API you need to be authenticated.
+
 ## Administrator Interface
 The administrator interface provides the following functionality:
 
-List all currencies, markets or currency values.  
+List all currencies, markets and currency values.  
 Add new currencies, markets, and currency values to the system.  
 Edit and delete any currency, market or currency value.    
 
-For accessing it you need to be authenticated. For that you can log in as 'user' or 'admin'. Each one has its corresponding authority. The password is 'trader' in both cases.
+For accessing it you need to have ADMIN authority.
+
+## Authentication
+You can log in as 'user' or 'admin'. Each one has its corresponding authority. The password is 'trader' in both cases. Yo may also register a new user if you want to.
 
 ## Database Setup
 This Spring application uses H2 database to store and manage data. The database is initialized using the schema.sql and data.sql files located in the /src/main/resources directory.
@@ -69,5 +74,5 @@ The application was built using the following technologies:
 - Thymeleaf
 - Bootstrap
 - Ionicons
-- OpenAPI
+- SpringDoc
 - Lombok
