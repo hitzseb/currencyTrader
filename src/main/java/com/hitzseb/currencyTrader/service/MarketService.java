@@ -1,5 +1,6 @@
 package com.hitzseb.currencyTrader.service;
 
+import com.hitzseb.currencyTrader.dto.CodeDto;
 import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.repository.MarketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class MarketService {
     public List<Market> getAllMarkets() {
         return marketRepository.findAll();
     }
-    public List<Code> getAllMarketCodes() {
-        return marketRepository.findAllBy();
+    public List<CodeDto> getAllMarketCodes() {
+        return marketRepository.findNameAndCodeBy();
     }
 
     public boolean marketCodeExists(String code) {

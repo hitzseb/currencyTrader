@@ -1,4 +1,4 @@
-package com.hitzseb.currencyTrader.controller.ui;
+package com.hitzseb.currencyTrader.controller;
 
 import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.service.CurrencyService;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/market")
-public class MarketUiController {
+public class MarketController {
     @Autowired
     MarketService marketService;
     @Autowired

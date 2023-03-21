@@ -1,4 +1,4 @@
-package com.hitzseb.currencyTrader.controller.api;
+package com.hitzseb.currencyTrader.controller;
 
 public class Constants {
     public static final String EMPTY_PARAM = "Empty parameter";

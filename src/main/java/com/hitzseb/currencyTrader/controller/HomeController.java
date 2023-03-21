@@ -1,4 +1,4 @@
-package com.hitzseb.currencyTrader.controller.ui;
+package com.hitzseb.currencyTrader.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
