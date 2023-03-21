@@ -1,4 +1,4 @@
-package com.hitzseb.currencyTrader.controller;
+package com.hitzseb.currencyTrader.controller.ui;
 
 import com.hitzseb.currencyTrader.model.CurrencyValue;
 import com.hitzseb.currencyTrader.service.CurrencyService;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/value")
-public class CurrencyValueController {
+public class CurrencyValueUiController {
     @Autowired
     CurrencyValueService currencyValueService;
     @Autowired

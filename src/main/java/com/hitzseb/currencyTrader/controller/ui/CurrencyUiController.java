@@ -1,4 +1,4 @@
-package com.hitzseb.currencyTrader.controller;
+package com.hitzseb.currencyTrader.controller.ui;
 
 import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.service.CurrencyService;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/admin/currency")
 //@RequestMapping("/admin/currency/")
-public class CurrencyController {
+public class CurrencyUiController {
     @Autowired
     CurrencyService currencyService;
 

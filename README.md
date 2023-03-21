@@ -32,6 +32,8 @@ Example: [http://localhost:8080/api/v1/exchange?operation=SALE&market=ARG&from=A
 **/variation**: This endpoint accepts a currency code, a market code, and a date. It then returns the exchange rate variation for that currency in that market on the specified date, based on the values registered in the database. The returned value includes the historical records for that currency and market up to the specified date.  
 Example: [http://localhost:8080/api/v1/variation?currency=USD&market=ARG&date=2020-01-01](http://localhost:8080/api/v1/variation?currency=USD&market=ARG&date=2020-01-01)
 
+Also, for the sake of making these calls, there are two endpoints that retrieve all relevant currency and market data respectively.
+
 For accessing the API you need to be authenticated.
 
 ## Administrator Interface

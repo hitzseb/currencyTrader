@@ -24,6 +24,9 @@ public class MarketService {
     public List<Market> getAllMarkets() {
         return marketRepository.findAll();
     }
+    public List<Code> getAllMarketCodes() {
+        return marketRepository.findAllBy();
+    }
 
     public boolean marketCodeExists(String code) {
         return marketCodeExists(code, null);

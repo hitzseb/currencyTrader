@@ -1,7 +1,8 @@
-package com.hitzseb.currencyTrader.controller;
+package com.hitzseb.currencyTrader.controller.api;
 
 import com.hitzseb.currencyTrader.response.VariationResponse;
 import com.hitzseb.currencyTrader.service.VariationService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class VariationController {
     @Autowired
     VariationService variationService;
 
-    @io.swagger.v3.oas.annotations.Operation(summary = "This API endpoint calculates the variation rate of an exchange rate for a specified currency in a market since a given date, and returns the associated value records.",
+    @Operation(summary = "This API endpoint calculates the variation rate of an exchange rate for a specified currency in a market since a given date, and returns the associated value records.",
             description = "The `exchangeRateVariation` API endpoint calculates the variation rate of an exchange rate for a specified currency in a market since a given date. The endpoint takes in three query parameters: `currency`, `market`, and `date`. The `currency` parameter specifies the ISO code of the currency for which the exchange rate variation needs to be calculated. The `market` parameter specifies the market code where the exchange rate needs to be calculated. The `date` parameter specifies the date from which the exchange rate variation needs to be calculated in the format \"YYYY-MM-DD\".\n" +
                     "\n" +
                     "If any of the query parameters are missing, the API will return a bad request response with an appropriate message. If the API call is successful, it will return a JSON response containing the exchange rate variation rate and associated value records.\n" +

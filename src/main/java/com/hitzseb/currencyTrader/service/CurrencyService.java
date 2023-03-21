@@ -24,6 +24,9 @@ public class CurrencyService {
     public List<Currency> getAllCurrencies() {
         return currencyRepository.findAll();
     }
+    public List<Code> getAllCurrencyCodes() {
+        return currencyRepository.findAllBy();
+    }
 
     public boolean currencyCodeExists(String code) {
         return currencyCodeExists(code, null);
