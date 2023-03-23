@@ -23,7 +23,7 @@ public class CodeController {
     @Operation(summary = "Get all currency codes",
             description = "This endpoint retrieves a list of all available currency names and codes, along with their respective URLs, which contain their full data.")
     @GetMapping("/currency")
-    public ResponseEntity<?> getCurrencies() {
+    public ResponseEntity<List<CodeDto>> getCurrencies() {
         List<CodeDto> currencies = currencyService.getAllCurrencyCodes();
         return ResponseEntity.ok(currencies);
     }
@@ -31,7 +31,7 @@ public class CodeController {
     @Operation(summary = "Get all Market codes",
             description = "This endpoint retrieves a list of all available market names and codes, along with their respective URLs, which contain their full data.")
     @GetMapping("/market")
-    public ResponseEntity<?> getMarkets() {
+    public ResponseEntity<List<CodeDto>> getMarkets() {
         List<CodeDto> markets = marketService.getAllMarketCodes();
         return ResponseEntity.ok(markets);
     }

@@ -7,6 +7,7 @@ import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.model.CurrencyValue;
 import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.response.VariationResponse;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +24,24 @@ public class VariationService {
     @Autowired
     CurrencyValueService currencyValueService;
 
-    public VariationResponse getExchangeRateVariationResponse
-            (String currencyCode, String marketCode, LocalDate registeredAt) {
-        Currency currency = currencyService.getCurrencyByCode(currencyCode).get();
-        CurrencyDto currencyDto = new CurrencyDto(currency.getName(), currencyCode, currency.getSymbol());
-        Market market = marketService.getMarketByCode(marketCode).get();
+    public VariationResponse getExchangeRateVariationResponse(
+            String currencyCode,
+            String marketCode,
+            LocalDate registeredAt)
+            throws EntityNotFoundException {
+        Currency currency;
+        currency = currencyService.getCurrencyByCode(currencyCode)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Currency not found with code " + currencyCode));
+        CurrencyDto currencyDto = new CurrencyDto(
+                currency.getName(),
+                currencyCode,
+                currency.getSymbol());
+
+        Market market;
+        market = marketService.getMarketByCode(marketCode)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Market not found with id " + marketCode));
         Currency marketCurrency = market.getCurrency();
         String marketCurrencyName = marketCurrency.getName();
         String marketCurrencyCode = marketCurrency.getCode();

@@ -4,7 +4,9 @@ import com.hitzseb.currencyTrader.response.VariationResponse;
 import com.hitzseb.currencyTrader.service.VariationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 @RestController
@@ -33,16 +36,27 @@ public class VariationController {
             @Parameter(description = "Market code: e.g. ARG")
             @RequestParam("market") Optional<String> marketCode,
             @Parameter(description = "YYYY-MM-DD format date")
-            @RequestParam("date")Optional<LocalDate> registeredAt) {
-        if (!(currencyCode.isPresent() && marketCode.isPresent() && registeredAt.isPresent())) {
-            return ResponseEntity.badRequest().body(Constants.EMPTY_PARAM);
+            @RequestParam("date")Optional<String> registeredAtStr) {
+        if (!currencyCode.isPresent()) {
+            return ResponseEntity.badRequest().body("Parameter currency is missing.");
+        }
+        if (!marketCode.isPresent()) {
+            return ResponseEntity.badRequest().body("Parameter market is missing.");
+        }
+        if (registeredAtStr.isEmpty()) {
+            return ResponseEntity.badRequest().body("parameter date is missing.");
         }
         try {
-            VariationResponse variation = variationService.getExchangeRateVariationResponse(currencyCode.get(),
-                    marketCode.get(), registeredAt.get());
+            LocalDate registeredAt = LocalDate.parse(registeredAtStr.get());
+            VariationResponse variation = variationService.getExchangeRateVariationResponse(
+                    currencyCode.get(),
+                    marketCode.get(),
+                    registeredAt);
             return ResponseEntity.ok(variation);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Constants.INVALID_PARAM);
+        } catch (DateTimeParseException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Parameter date must be in YYYY-MM-DD format.");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 }

@@ -4,12 +4,11 @@ import com.hitzseb.currencyTrader.response.ExchangeResponse;
 import com.hitzseb.currencyTrader.service.ExchangeService;
 import com.hitzseb.currencyTrader.enums.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -37,15 +36,28 @@ public class ExchangeController {
             @RequestParam("to") Optional<String> currencyToCode,
             @Parameter(description = "Amount to exchange")
             @RequestParam("amount") Optional<Double> amount) {
-        if (!(marketCode.isPresent() && currencyFromCode.isPresent() && currencyToCode.isPresent() && amount.isPresent())) {
-            return ResponseEntity.badRequest().body(Constants.EMPTY_PARAM);
+        if (!operation.isPresent()) {
+            return ResponseEntity.badRequest().body("Parameter operation is missing.");
+        }
+        if (!marketCode.isPresent()) {
+            return ResponseEntity.badRequest().body("Parameter operation is missing.");
+        }
+        if (!currencyFromCode.isPresent()) {
+            return ResponseEntity.badRequest().body("Parameter operation is missing.");
+        }
+        if (!currencyToCode.isPresent()) {
+            return ResponseEntity.badRequest().body("Parameter operation is missing.");
         }
         try {
-            ExchangeResponse exchangeResponse = exchangeService.exchangeCurrency(operation.get(), marketCode.get(),
-                    currencyFromCode.get(), currencyToCode.get(), amount.get());
+            ExchangeResponse exchangeResponse = exchangeService.exchangeCurrency(
+                    operation.get(),
+                    marketCode.get(),
+                    currencyFromCode.get(),
+                    currencyToCode.get(),
+                    amount.get());
             return ResponseEntity.ok(exchangeResponse);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Constants.INVALID_PARAM);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 }
