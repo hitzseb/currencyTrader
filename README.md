@@ -75,6 +75,5 @@ The application was built using the following technologies:
 - H2 Database
 - Thymeleaf
 - Bootstrap
-- Ionicons
-- SpringDoc
+- Springdoc
 - Lombok

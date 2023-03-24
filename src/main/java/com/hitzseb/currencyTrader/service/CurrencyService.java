@@ -1,6 +1,5 @@
 package com.hitzseb.currencyTrader.service;
 
-import com.hitzseb.currencyTrader.dto.CodeDto;
 import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.repository.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,6 @@ public class CurrencyService {
 
     public List<Currency> getAllCurrencies() {
         return currencyRepository.findAll();
-    }
-    public List<CodeDto> getAllCurrencyCodes() {
-        return currencyRepository.findNameAndCodeBy();
     }
 
     public boolean currencyCodeExists(String code) {

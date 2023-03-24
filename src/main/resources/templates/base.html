@@ -10,24 +10,19 @@
 
 <header th:fragment="header">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand">Currency Trader</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item"><a class="nav-link" href="/">
-          <ion-icon name="home"></ion-icon>&nbsp Home<span class="sr-only">(current)</span></a>
+          Currency Trader<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item"><a class="nav-link" href="/swagger-ui/index.html">
-          <ion-icon name="document"></ion-icon>&nbsp API<span class="sr-only">(current)</span></a>
+          &nbsp API documentation<span class="sr-only">(current)</span></a>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-            <ion-icon name="hammer"></ion-icon>&nbsp Adm</a>
+            &nbsp Administrator</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="/admin/currency">Currencies</a>
             <a class="dropdown-item" href="/admin/market">Markets</a>
@@ -37,7 +32,7 @@
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-            <ion-icon name="person"></ion-icon>&nbsp User</a>
+            <ion-icon name="person"></ion-icon>&nbsp User account</a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="/login">Login</a>
             <a class="dropdown-item" href="/register">Register</a>
@@ -65,8 +60,6 @@
           src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
           crossorigin="anonymous"></script>
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </div>
 
 </html>
