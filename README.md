@@ -46,7 +46,7 @@ Edit and delete any currency, market or currency value.
 For accessing it you need to have ADMIN authority.
 
 ## Authentication
-You can log in as 'user' or 'admin'. Each one has its corresponding authority. The password is 'trader' in both cases. Yo may also register a new user if you want to.
+You can log in as 'user' or 'admin'. Each one has its corresponding authority. The password is 'trader' in both cases. You may also register a new user if you want to.
 
 ## Database Setup
 This Spring application uses H2 database to store and manage data. The database is initialized using the schema.sql and data.sql files located in the /src/main/resources directory.

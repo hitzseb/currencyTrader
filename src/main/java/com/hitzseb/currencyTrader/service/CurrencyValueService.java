@@ -32,6 +32,13 @@ public class CurrencyValueService {
     }
 
     public void saveCurrencyValue(CurrencyValue currencyValue) {
+        Optional<CurrencyValue> lastCurrencyValue = currencyValueRepository
+                .findByCurrencyAndMarketAndIsActiveIsTrue(
+                        currencyValue.getCurrency(),
+                        currencyValue.getMarket());
+        if (lastCurrencyValue.isPresent()) {
+            lastCurrencyValue.get().setActive(false);
+        }
         currencyValueRepository.save(currencyValue);
     }
 
@@ -40,7 +47,7 @@ public class CurrencyValueService {
     }
 
     public CurrencyValue getActiveValueOfCurrencyInMarket(Currency currency, Market market) {
-        return currencyValueRepository.findByCurrencyAndMarketAndIsActiveIsTrue(currency, market).get();
+        return currencyValueRepository.findByCurrencyAndMarketAndIsActiveIsTrue(currency, market).orElse(null);
     }
 
     public List<CurrencyValue> getAllValueOfCurrencyInMarketSinceDate
@@ -59,7 +66,7 @@ public class CurrencyValueService {
             LocalDate date = currencyValueDto.registeredAt();
             double saleValue = currencyValueDto.saleValue();
             String registeredAtStr = date.toString();
-            String saleValueStr = base.getCode() + base.getSymbol() + String.valueOf(saleValue);
+            String saleValueStr = base.getCode() + base.getSymbol() + saleValue;
             return new RegisteredValueDto(registeredAtStr, saleValueStr);
         }).collect(Collectors.toList());
         return strValues;
