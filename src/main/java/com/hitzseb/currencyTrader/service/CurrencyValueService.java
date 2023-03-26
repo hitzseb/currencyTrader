@@ -32,12 +32,14 @@ public class CurrencyValueService {
     }
 
     public void saveCurrencyValue(CurrencyValue currencyValue) {
-        Optional<CurrencyValue> lastCurrencyValue = currencyValueRepository
-                .findByCurrencyAndMarketAndIsActiveIsTrue(
-                        currencyValue.getCurrency(),
-                        currencyValue.getMarket());
-        if (lastCurrencyValue.isPresent()) {
-            lastCurrencyValue.get().setActive(false);
+        if (currencyValue.isActive()) {
+            Optional<CurrencyValue> lastCurrencyValue = currencyValueRepository
+                    .findByCurrencyAndMarketAndIsActiveIsTrue(
+                            currencyValue.getCurrency(),
+                            currencyValue.getMarket());
+            if (lastCurrencyValue.isPresent()) {
+                lastCurrencyValue.get().setActive(false);
+            }
         }
         currencyValueRepository.save(currencyValue);
     }
