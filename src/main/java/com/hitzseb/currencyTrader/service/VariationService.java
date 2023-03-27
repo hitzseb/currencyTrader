@@ -8,7 +8,7 @@ import com.hitzseb.currencyTrader.model.CurrencyValue;
 import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.response.VariationResponse;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -16,13 +16,11 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class VariationService {
-    @Autowired
-    CurrencyService currencyService;
-    @Autowired
-    MarketService marketService;
-    @Autowired
-    CurrencyValueService currencyValueService;
+    private final CurrencyService currencyService;
+    private final MarketService marketService;
+    private final CurrencyValueService currencyValueService;
 
     public VariationResponse getExchangeRateVariationResponse(
             String currencyCode,

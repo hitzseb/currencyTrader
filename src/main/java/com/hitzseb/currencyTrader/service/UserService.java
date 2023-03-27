@@ -3,7 +3,7 @@ package com.hitzseb.currencyTrader.service;
 import com.hitzseb.currencyTrader.enums.Role;
 import com.hitzseb.currencyTrader.model.User;
 import com.hitzseb.currencyTrader.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,13 +11,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
     private static String USER_NOT_FOUND_MSG = "user with name %s not found";
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

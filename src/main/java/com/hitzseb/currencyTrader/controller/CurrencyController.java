@@ -2,17 +2,16 @@ package com.hitzseb.currencyTrader.controller;
 
 import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.service.CurrencyService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/currency")
-//@RequestMapping("/admin/currency/")
+@RequiredArgsConstructor
 public class CurrencyController {
-    @Autowired
-    CurrencyService currencyService;
+    private final CurrencyService currencyService;
 
     @GetMapping
     public String showAllCurrencies(Model model) {

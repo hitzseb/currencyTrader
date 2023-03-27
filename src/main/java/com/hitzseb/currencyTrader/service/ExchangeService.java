@@ -7,17 +7,15 @@ import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.response.ExchangeResponse;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ExchangeService {
-    @Autowired
-    CurrencyService currencyService;
-    @Autowired
-    MarketService marketService;
-    @Autowired
-    CurrencyValueService currencyValueService;
+    private final CurrencyService currencyService;
+    private final MarketService marketService;
+    private final CurrencyValueService currencyValueService;
 
     public ExchangeResponse exchangeCurrency(
             Operation operation,

@@ -3,6 +3,7 @@ package com.hitzseb.currencyTrader.controller;
 import com.hitzseb.currencyTrader.dto.CodeDto;
 import com.hitzseb.currencyTrader.service.CodeService;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +14,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/code")
+@RequiredArgsConstructor
 public class CodeController {
-    @Autowired
-    CodeService service;
+    private final CodeService service;
 
     @Operation(summary = "Get all currency codes",
             description = "This endpoint retrieves a list of all available currency names and codes, along with their respective URLs, which contain their full data.")

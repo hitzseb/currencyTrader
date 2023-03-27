@@ -2,7 +2,7 @@ package com.hitzseb.currencyTrader.controller;
 
 import com.hitzseb.currencyTrader.model.User;
 import com.hitzseb.currencyTrader.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequiredArgsConstructor
 public class AuthenticationController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/register")
     public String showRegisterPage(Model model) {

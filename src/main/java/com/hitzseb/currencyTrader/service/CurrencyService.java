@@ -2,16 +2,16 @@ package com.hitzseb.currencyTrader.service;
 
 import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.repository.CurrencyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CurrencyService {
-    @Autowired
-    CurrencyRepository currencyRepository;
+    private final CurrencyRepository currencyRepository;
 
     public Optional<Currency> getCurrencyByCode(String code) {
         return currencyRepository.findCurrencyByCode(code);

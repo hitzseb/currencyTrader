@@ -4,7 +4,7 @@ import com.hitzseb.currencyTrader.model.CurrencyValue;
 import com.hitzseb.currencyTrader.service.CurrencyService;
 import com.hitzseb.currencyTrader.service.CurrencyValueService;
 import com.hitzseb.currencyTrader.service.MarketService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,13 +14,11 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/value")
+@RequiredArgsConstructor
 public class CurrencyValueController {
-    @Autowired
-    CurrencyValueService currencyValueService;
-    @Autowired
-    CurrencyService currencyService;
-    @Autowired
-    MarketService marketService;
+    private final CurrencyValueService currencyValueService;
+    private final CurrencyService currencyService;
+    private final MarketService marketService;
 
     @GetMapping
     public String showAllValues(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {

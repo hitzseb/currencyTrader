@@ -6,7 +6,7 @@ import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.model.CurrencyValue;
 import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.repository.CurrencyValueRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,9 +18,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CurrencyValueService {
-    @Autowired
-    CurrencyValueRepository currencyValueRepository;
+    private final CurrencyValueRepository currencyValueRepository;
 
     public Optional<CurrencyValue> getCurrencyValueById(Long id) {
         return  currencyValueRepository.findById(id);

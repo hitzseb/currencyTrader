@@ -2,16 +2,16 @@ package com.hitzseb.currencyTrader.service;
 
 import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.repository.MarketRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MarketService {
-    @Autowired
-    MarketRepository marketRepository;
+    private final MarketRepository marketRepository;
 
     public Optional<Market> getMarketByCode(String code) {
         return marketRepository.findMarketByCode(code);
