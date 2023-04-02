@@ -1,4 +1,4 @@
-package com.hitzseb.currencyTrader.controller;
+package com.hitzseb.currencyTrader.controller.ui;
 
 import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.service.CurrencyService;

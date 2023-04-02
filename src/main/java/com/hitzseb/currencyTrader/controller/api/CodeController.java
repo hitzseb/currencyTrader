@@ -1,10 +1,9 @@
-package com.hitzseb.currencyTrader.controller;
+package com.hitzseb.currencyTrader.controller.api;
 
 import com.hitzseb.currencyTrader.dto.CodeDto;
 import com.hitzseb.currencyTrader.service.CodeService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

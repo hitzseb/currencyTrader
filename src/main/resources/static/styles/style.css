@@ -1,0 +1,13 @@
+@media (max-width: 767px) {
+    p, span {
+        font-size: 120% !important;
+    }
+}
+
+.background {
+    background-image: url("/images/background.webp");
+}
+
+.card {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}

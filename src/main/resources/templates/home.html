@@ -1,17 +1,61 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <th:replace th:fragment="common-css" th:replace="base :: common-css"></th:replace>
     <title>Currency Trader</title>
 </head>
-<body>
+<body >
 <header th:replace="base :: header"></header>
 
-<img th:src="@{/images/currencyTrader.png}" class="img-fluid w-100" alt="currency-trading">
+<div class="container-fluid pt-5 pb-5 text-center background">
+    <h2 class="text-light display-2 m-3">CurrencyTrader</h2>
+    <div class="col-lg-6 col-sm-12 mx-auto">
+        <p class="text-light lead">This is a Spring application that includes both a RESTful API and an administrator interface. The API provides currency conversion and exchange rate variation calculation functionality, while the administrator interface allows for the manipulation of the data used by the API.</p>
+    </div>
+    <a href="/register" class="btn btn-light btn-outline-dark border">
+        <span class="lead font-weight-medium">Get started</span>
+    </a>
+</div>
+
+<div class="container-fluid mt-5 mb-5">
+    <div class="row">
+        <div class="col-lg-4 col-sm-12 mx-auto">
+            <div class="card text-center my-3">
+                <img th:src="@{/images/exchange.webp}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 class="card-title">Calculate exchange</h3>
+                    <p class="card-text">Convert an amount of one currency to another by the given market value.</p>
+                    <a href="/exchange" class="btn btn-primary"><span>Try out</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-12 mx-auto">
+            <div class="card text-center my-3">
+                <img th:src="@{/images/variation.png}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 class="card-title">Calculate variation</h3>
+                    <p class="card-text">Calculate the exchange rate variation of a currency in a given market.</p>
+                    <a href="/variation" class="btn btn-primary"><span>Try out</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-12 mx-auto">
+            <div class="card text-center my-3">
+                <img th:src="@{/images/value.webp}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h3 class="card-title">Current value</h3>
+                    <p class="card-text">Get the value of a currency in a given market.</p>
+                    <a href="/current" class="btn btn-primary"><span>Try out</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <footer th:replace="base :: footer"></footer>
-<th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
+
+<script th:replace="base :: scripts"></script>
+
 </body>
 </html>
