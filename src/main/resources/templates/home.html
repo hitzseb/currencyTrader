@@ -8,20 +8,23 @@
 <body >
 <header th:replace="base :: header"></header>
 
-<div class="container-fluid pt-5 pb-5 text-center background">
-    <h2 class="text-light display-4 m-3">CurrencyTrader</h2>
+<div class="container-fluid py-5 text-center background">
+    <h2 class="text-light display-4 mt-5">CurrencyTrader</h2>
     <div class="col-lg-6 col-sm-12 mx-auto">
-        <p class="text-light lead">This is a Spring application that includes both a RESTful API and an administrator interface. The API provides currency conversion and exchange rate variation calculation functionality, while the administrator interface allows for the manipulation of the data used by the API.</p>
+        <p class="text-light lead">This is a Spring application that includes both a RESTful API
+            and an administrator interface. The API provides currency conversion and exchange rate
+            variation calculation functionality, while the administrator interface allows for the
+            manipulation of the data used by the API.</p>
     </div>
     <a href="/register" class="btn btn-dark border">
         <span class="lead text-light font-weight-medium">Get started</span>
     </a>
 </div>
 
-<div class="container-fluid mt-5 mb-5">
+<div class="container-fluid my-5 py-5">
     <div class="row">
         <div class="col-lg-4 col-sm-12 mx-auto">
-            <div class="card text-center my-3">
+            <div class="card shadow text-center my-3">
                 <img th:src="@{/images/exchange.webp}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h3 class="card-title">Calculate exchange</h3>
@@ -33,7 +36,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-sm-12 mx-auto">
-            <div class="card text-center my-3">
+            <div class="card shadow text-center my-3">
                 <img th:src="@{/images/variation.png}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h3 class="card-title">Calculate variation</h3>
@@ -45,7 +48,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-sm-12 mx-auto">
-            <div class="card text-center my-3">
+            <div class="card shadow text-center my-3">
                 <img th:src="@{/images/value.webp}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h3 class="card-title">Current value</h3>
