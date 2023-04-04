@@ -27,7 +27,7 @@ function variation() {
         .then(response => response.json())
         .then(data => {
             const result = document.getElementById("result");
-            result.innerHTML = JSON.stringify(data);
+            result.innerHTML = data.variation;
         })
         .catch(error => console.error(error));
 }
@@ -42,7 +42,7 @@ function getValue() {
         .then(response => response.json())
         .then(data => {
             const result = document.getElementById("result");
-            result.innerHTML = JSON.stringify(data);
+            result.innerHTML = data.value;
         })
         .catch(error => console.error(error));
 }

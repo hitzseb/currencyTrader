@@ -36,7 +36,9 @@ public class VariationController {
             @Parameter(description = "Market code: e.g. ARG")
             @RequestParam("market") Optional<String> marketCode,
             @Parameter(description = "YYYY-MM-DD format date")
-            @RequestParam("date")Optional<String> registeredAtStr) {
+            @RequestParam("date")Optional<String> registeredAtStr,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size) {
         if (!currencyCode.isPresent()) {
             return ResponseEntity.badRequest().body("Parameter currency is missing.");
         }
@@ -51,7 +53,9 @@ public class VariationController {
             VariationResponse variation = variationService.getExchangeRateVariationResponse(
                     currencyCode.get(),
                     marketCode.get(),
-                    registeredAt);
+                    registeredAt,
+                    page,
+                    size);
             return ResponseEntity.ok(variation);
         } catch (DateTimeParseException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Parameter date must be in YYYY-MM-DD format.");
