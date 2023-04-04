@@ -2,6 +2,7 @@ package com.hitzseb.currencyTrader.controller.api;
 
 import com.hitzseb.currencyTrader.response.ValueResponse;
 import com.hitzseb.currencyTrader.service.CurrentValueService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,12 @@ import java.util.Optional;
 public class CurrentValueController {
     private final CurrentValueService service;
 
+    @Operation(summary = "retrieves the current value of a specified currency in a specified market.",
+            description = "The CurrentValueController endpoint retrieves the current value of a specified currency in a specified market." +
+                    " The endpoint requires two query parameters: `currency` and `market` codes." +
+                    " If either of these parameters is missing, the endpoint will return a bad request response." +
+                    " If the specified currency and market combination is not found, the endpoint will return a not found response." +
+                    " Otherwise, it returns the current value of the specified currency in the specified market.")
     @GetMapping("/api/v1/current")
     public ResponseEntity<?> getCurrentValue(
             @RequestParam("currency") Optional<String> currencyCode,
