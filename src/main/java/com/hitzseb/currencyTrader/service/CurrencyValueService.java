@@ -6,6 +6,7 @@ import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.model.CurrencyValue;
 import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.repository.CurrencyValueRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,18 +21,38 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class CurrencyValueService {
+    private final CurrencyService currencyService;
+    private final MarketService marketService;
     private final CurrencyValueRepository currencyValueRepository;
 
-    public Optional<CurrencyValue> getCurrencyValueById(Long id) {
-        return  currencyValueRepository.findById(id);
-    }
-
-    public Page<CurrencyValue> getAllCurrencyValues(int page, int size) {
+    public Page<CurrencyValue> getAllCurrencyValues(
+            int page,
+            int size,
+            String currencyCode,
+            String marketCode)
+            throws EntityNotFoundException {
+        Currency currency = currencyService.getCurrencyByCode(currencyCode)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Currency not found with code: " + currencyCode));
+        Market market = marketService.getMarketByCode(marketCode)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Market not found with code: " + marketCode));
         Pageable pageable = PageRequest.of(page, size);
-        return currencyValueRepository.findAll(pageable);
+        return currencyValueRepository.findByCurrencyAndMarket(pageable, currency, market);
     }
 
-    public void saveCurrencyValue(CurrencyValue currencyValue) {
+    public CurrencyValue getCurrencyValueById(Long id) throws EntityNotFoundException {
+        CurrencyValue value;
+        value = currencyValueRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Currency value not found with id: " + id));
+        return value;
+    }
+
+    public CurrencyValue saveCurrencyValue(CurrencyValue currencyValue) throws IllegalArgumentException {
+        if (!(currencyValue instanceof CurrencyValue)) {
+            throw new IllegalArgumentException("The object currencyValue must be an instance of the class CurrencyValue.");
+        }
         if (currencyValue.isActive()) {
             Optional<CurrencyValue> lastCurrencyValue = currencyValueRepository
                     .findByCurrencyAndMarketAndIsActiveIsTrue(
@@ -41,18 +62,46 @@ public class CurrencyValueService {
                 lastCurrencyValue.get().setActive(false);
             }
         }
-        currencyValueRepository.save(currencyValue);
+        return currencyValueRepository.save(currencyValue);
     }
 
-    public void  deleteCurrencyValueById(Long id) {
-        currencyValueRepository.deleteById(id);
+    public CurrencyValue editCurrencyValue(
+            Long id,
+            Optional<LocalDate> registeredAt,
+            Optional<Double> purchaseValue,
+            Optional<Double> saleValue,
+            Optional<Boolean> isActive)
+            throws EntityNotFoundException {
+        CurrencyValue value = currencyValueRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Currency value not found with id: " + id));
+        if (registeredAt.isPresent()) {
+            value.setRegisteredAt(registeredAt.get());
+        }
+        if (purchaseValue.isPresent()) {
+            value.setPurchaseValue(purchaseValue.get());
+        }
+        if (saleValue.isPresent()) {
+            value.setSaleValue(saleValue.get());
+        }
+        if (isActive.isPresent()) {
+            value.setActive(isActive.get());
+        }
+        return currencyValueRepository.save(value);
+    }
+
+    public void deleteCurrencyValueById(Long id) throws EntityNotFoundException {
+        CurrencyValue value = currencyValueRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Currency value not found with id: " + id));
+        currencyValueRepository.delete(value);
     }
 
     public CurrencyValue getActiveValueOfCurrencyInMarket(Currency currency, Market market) {
         return currencyValueRepository.findByCurrencyAndMarketAndIsActiveIsTrue(currency, market).orElse(null);
     }
 
-    public List<CurrencyValue> getAllValueOfCurrencyInMarketSinceDate
+    public List<CurrencyValue> getAllValuesOfCurrencyInMarketSinceDate
             (Currency currency, Market market, LocalDate registeredAt) {
         return currencyValueRepository.findByCurrencyAndMarketAndRegisteredAtAfterOrderByRegisteredAt
                 (currency, market, registeredAt);

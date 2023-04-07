@@ -29,7 +29,9 @@
             <td th:text="${currency.symbol}"></td>
             <td>
                 <a th:href="@{'/admin/currency/{id}/edit'(id=${currency.id})}">Edit</a>
-                <a th:href="@{'/admin/currency/{id}/delete'(id=${currency.id})}">Delete</a>
+                <a href="#" th:attr="onclick='deleteCurrency(\'' + ${currency.id} + '\')'">Delete</a>
+
+
             </td>
         </tr>
         </tbody>
@@ -38,6 +40,8 @@
 </div>
 
 <footer th:replace="base :: footer"></footer>
+
+<script th:src="@{/scripts/currency.js}"></script>
 
 <th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
 

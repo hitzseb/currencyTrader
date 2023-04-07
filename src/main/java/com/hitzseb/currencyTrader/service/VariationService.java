@@ -77,7 +77,7 @@ public class VariationService {
     public double calculateExchangeRateVariation(Currency currency, Market market, LocalDate registeredAt) {
         double variation = 0;
         if (currency != market.getCurrency()) {
-            List<CurrencyValue> values = currencyValueService.getAllValueOfCurrencyInMarketSinceDate
+            List<CurrencyValue> values = currencyValueService.getAllValuesOfCurrencyInMarketSinceDate
                     (currency, market, registeredAt);
             if (values.size() > 1) {
                 if (values.size() > 2) {

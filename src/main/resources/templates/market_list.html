@@ -29,7 +29,7 @@
             <td th:text="${market.currency.code}"></td>
             <td>
                 <a th:href="@{'/admin/market/{id}/edit'(id=${market.id})}">Edit</a>
-                <a th:href="@{'/admin/market/{id}/delete'(id=${market.id})}">Delete</a>
+                <a href="#" th:attr="onclick='deleteMarket(\'' + ${market.id} + '\')'">Delete</a>
             </td>
         </tr>
         </tbody>
@@ -38,6 +38,8 @@
 </div>
 
 <footer th:replace="base :: footer"></footer>
+
+<script th:src="@{/scripts/market.js}"></script>
 
 <th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
 

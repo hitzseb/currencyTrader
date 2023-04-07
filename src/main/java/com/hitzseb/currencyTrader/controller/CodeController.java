@@ -1,4 +1,4 @@
-package com.hitzseb.currencyTrader.controller.api;
+package com.hitzseb.currencyTrader.controller;
 
 import com.hitzseb.currencyTrader.dto.CodeDto;
 import com.hitzseb.currencyTrader.service.CodeService;

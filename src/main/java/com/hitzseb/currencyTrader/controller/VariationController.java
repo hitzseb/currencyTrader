@@ -1,4 +1,4 @@
-package com.hitzseb.currencyTrader.controller.api;
+package com.hitzseb.currencyTrader.controller;
 
 import com.hitzseb.currencyTrader.response.VariationResponse;
 import com.hitzseb.currencyTrader.service.VariationService;

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
@@ -12,14 +11,13 @@
 
 <div class="container-fluid py-5">
   <div class="col-lg-3 col-sm-10 mx-auto my-5">
-  <form class="mt-3 mb-3" action="#" th:action="@{'/admin/market/save'}" th:object="${market}"
-        method="POST">
+  <form class="mt-3 mb-3" action="#" th:object="${market}" method="POST">
     <div class="form-group">
-      <label for="name">Currency name:</label>
+      <label for="name">Market name:</label>
       <input class="form-control" type="text" id="name" name="name" th:field="*{name}" />
     </div>
     <div class="form-group">
-      <label for="code">Currency code:</label>
+      <label for="code">Market code:</label>
       <input class="form-control" type="text" id="code" name="code" th:field="*{code}" />
     </div>
     <div class="form-group">
@@ -31,12 +29,14 @@
         </th:block>
       </select>
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Save market</button>
+    <button type="button" onclick="saveMarket()" class="btn btn-primary mt-3">Save market</button>
   </form>
   </div>
 </div>
 
 <footer th:replace="base :: footer"></footer>
+
+<script th:src="@{/scripts/market.js}"></script>
 
 <th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
 </body>

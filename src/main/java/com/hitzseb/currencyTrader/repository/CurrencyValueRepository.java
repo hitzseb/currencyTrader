@@ -16,6 +16,7 @@ import java.util.Optional;
 @Repository
 public interface CurrencyValueRepository extends JpaRepository<CurrencyValue, Long> {
     Page<CurrencyValue> findAll(Pageable pageable);
+    Page<CurrencyValue> findByCurrencyAndMarket(Pageable pageable, Currency currency, Market market);
     Optional<CurrencyValue> findByCurrencyAndMarketAndIsActiveIsTrue(Currency currency, Market market);
 
     List<CurrencyValue> findByCurrencyAndMarketAndRegisteredAtAfterOrderByRegisteredAt

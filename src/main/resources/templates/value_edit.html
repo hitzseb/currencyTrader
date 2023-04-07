@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
@@ -12,7 +11,7 @@
 
 <div class="container-fluid py-5">
   <div class="col-lg-3 col-sm-10 mx-auto my-5">
-  <form th:action="@{'/admin/value/{id}/edit' (id=${value.id})}" th:object="${value}" method="post">
+  <form th:object="${value}" method="PUT">
     <div class="form-group">
       <label for="registeredAt">Registered At:</label>
       <input class="form-control" type="date" id="registeredAt" name="registeredAt" th:field="*{registeredAt}">
@@ -47,10 +46,12 @@
         </th:block>
       </select>
     </div>
-    <button class="btn btn-primary" type="submit">Update value</button>
+    <button class="btn btn-primary" type="button" onclick="editValue(this)" th:data-value-id="${value.id}">Update value</button>
   </form>
   </div>
 </div>
+
+<script th:src="@{/scripts/value.js}"></script>
 
 <footer th:replace="base :: footer"></footer>
 
