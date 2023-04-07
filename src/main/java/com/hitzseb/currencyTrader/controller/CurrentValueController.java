@@ -24,7 +24,7 @@ public class CurrentValueController {
                     " If either of these parameters is missing, the endpoint will return a bad request response." +
                     " If the specified currency and market combination is not found, the endpoint will return a not found response." +
                     " Otherwise, it returns the current value of the specified currency in the specified market.")
-    @GetMapping("/api/v1/current")
+    @GetMapping("/api/current")
     public ResponseEntity<?> getCurrentValue(
             @RequestParam("currency") Optional<String> currencyCode,
             @RequestParam("market") Optional<String> marketCode) {

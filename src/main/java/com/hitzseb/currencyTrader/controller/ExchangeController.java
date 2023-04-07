@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class ExchangeController {
     private final ExchangeService exchangeService;
@@ -24,7 +23,7 @@ public class ExchangeController {
                     "If any of the query parameters are missing, the API will return a bad request response with an appropriate message. If the API call is successful, it will return a JSON response containing the equivalent value in the target currency based on the latest market values.\n" +
                     "\n" +
                     "Please note that this API endpoint may throw an exception if any of the parameters are invalid or if there is an error while processing the request. In such cases, the API will return a bad request response with an appropriate message.")
-    @GetMapping("/exchange")
+    @GetMapping("/api/exchange")
     public ResponseEntity<?> exchangeCurrency(
             @Parameter(description = "Operation type")
             @RequestParam("operation") Optional<Operation> operation,
