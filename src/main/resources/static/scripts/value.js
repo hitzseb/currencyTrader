@@ -1,4 +1,7 @@
+let currenctPage = 0;
+
 function showValues(page) {
+    currenctPage = page;
     const currency = document.getElementById("currency").value;
     const market = document.getElementById("market").value;
     const size = 10;
@@ -9,10 +12,10 @@ function showValues(page) {
         .then(response => response.json())
         .then(data => {
             const table = document.getElementById("table");
-            const tbody = document.createElement("tbody"); // Crear el elemento tbody
+            const tbody = document.createElement("tbody");
 
             for (let i = 0; i < data.content.length; i++) {
-                const row = document.createElement("tr"); // Crear la fila correspondiente
+                const row = document.createElement("tr");
                 row.innerHTML =
                     `<td>${data.content[i].id}</td>
                     <td>${data.content[i].registeredAt}</td>
@@ -39,12 +42,16 @@ function showValues(page) {
                     </tr>
                 </thead>`;
 
-            table.appendChild(tbody); // Agregar el tbody a la tabla
+            table.appendChild(tbody);
+
+            const pagination = document.getElementById("pagination");
+            pagination.innerHTML = `<li class="page-item"><a class="page-link" href="#" onclick="showValues(${currenctPage - 1})">Previous</a></li>`;
+            for (let i = 0; i < data.totalPages; i++) {
+                pagination.innerHTML += `<li class="page-item"><a class="page-link" href="#" id="${'page' + (i+1)}" onclick="showValues(${i})">${i+1}</a></li>`;
+            }
+            pagination.innerHTML += `<li class="page-item"><a class="page-link" href="#" onclick="showValues(${currenctPage + 1})">Next</a></li>`;
         })
-
         .catch(error => console.error(error));
-
-    document.getElementById("pagination").classList.remove('sr-only')
 }
 
 function saveValue() {
