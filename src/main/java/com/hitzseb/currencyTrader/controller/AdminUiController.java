@@ -45,7 +45,7 @@ public class AdminUiController {
         }
     }
 
-//    MARKET
+    //    MARKET
 
     @GetMapping("/market")
     public String showAllMarkets(Model model) {
@@ -73,7 +73,7 @@ public class AdminUiController {
         }
     }
 
-//    VALUE
+    //    VALUE
 
     @GetMapping("/value")
     public String showAllValues(Model model) {

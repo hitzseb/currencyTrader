@@ -1,3 +1,49 @@
+:root {
+    --custom-black: #111;
+    --custom-blue: #1b80d6;
+    --custom-green: #0a879e;
+}
+
 .background {
     background-image: url("/images/background.webp");
+}
+
+#header.navbar {
+    background-color: var(--custom-black) !important;
+}
+
+#footer.navbar {
+    background-color: var(--custom-black) !important;
+}
+
+.btn-dark {
+    background-color: var(--custom-black) !important;
+    border-color: var(--custom-black) !important;
+}
+
+.btn-primary {
+    background-color: var(--custom-blue) !important;
+    border-color: var(--custom-blue) !important;
+}
+
+.btn-success {
+    background-color: var(--custom-green) !important;
+    border-color: var(--custom-green) !important;
+}
+
+.custom-animation {
+    animation-name: drop !important;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes drop {
+    0% {
+        transform: translateY(-50%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

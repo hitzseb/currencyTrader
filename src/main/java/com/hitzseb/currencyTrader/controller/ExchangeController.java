@@ -1,8 +1,8 @@
 package com.hitzseb.currencyTrader.controller;
 
+import com.hitzseb.currencyTrader.enums.Operation;
 import com.hitzseb.currencyTrader.response.ExchangeResponse;
 import com.hitzseb.currencyTrader.service.ExchangeService;
-import com.hitzseb.currencyTrader.enums.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
