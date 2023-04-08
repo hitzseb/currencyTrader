@@ -19,7 +19,7 @@ function saveMarket() {
 
     fetch('/api/market/admin/save', options)
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => {window.location.href = "/admin/market";})
         .catch(error => console.log(error));
 }
 

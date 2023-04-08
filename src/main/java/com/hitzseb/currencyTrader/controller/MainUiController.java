@@ -1,17 +1,10 @@
 package com.hitzseb.currencyTrader.controller;
 
-import com.hitzseb.currencyTrader.model.Currency;
-import com.hitzseb.currencyTrader.model.CurrencyValue;
-import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.model.User;
 import com.hitzseb.currencyTrader.service.CurrencyService;
-import com.hitzseb.currencyTrader.service.CurrencyValueService;
 import com.hitzseb.currencyTrader.service.MarketService;
 import com.hitzseb.currencyTrader.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,19 +12,19 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-public class MvcController {
+public class MainUiController {
     private final UserService userService;
     private final CurrencyService currencyService;
     private final MarketService marketService;
 
-//    HOME
+    //    HOME
 
     @GetMapping("/")
     public String showHome() {
         return "home";
     }
 
-//    AUTH
+    //    AUTH
 
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
@@ -60,16 +53,16 @@ public class MvcController {
         return "login";
     }
 
-//    EXCHANGE
+    //    EXCHANGE
 
-@GetMapping("/exchange")
-public String showExchange(Model model) {
-    model.addAttribute("currencies", currencyService.getAllCurrencies());
-    model.addAttribute("markets", marketService.getAllMarkets());
-    return "exchange";
-}
+    @GetMapping("/exchange")
+    public String showExchange(Model model) {
+        model.addAttribute("currencies", currencyService.getAllCurrencies());
+        model.addAttribute("markets", marketService.getAllMarkets());
+        return "exchange";
+    }
 
-//    VARIATION
+    //    VARIATION
 
     @GetMapping("/variation")
     public String showVariation(Model model) {
@@ -78,7 +71,7 @@ public String showExchange(Model model) {
         return "variation";
     }
 
-//    CURRENT VALUE
+    //    CURRENT VALUE
 
     @GetMapping("/current")
     public String showCurrentValue(Model model) {

@@ -30,13 +30,11 @@
             <td>
                 <a th:href="@{'/admin/currency/{id}/edit'(id=${currency.id})}">Edit</a>
                 <a href="#" th:attr="onclick='deleteCurrency(\'' + ${currency.id} + '\')'">Delete</a>
-
-
             </td>
         </tr>
         </tbody>
     </table>
-    <a class="btn btn-primary mt-3 mb-3" href="/admin/currency/save">New Currency</a>
+    <a class="btn btn-success mt-3 mb-3" href="/admin/currency/save">New Currency</a>
 </div>
 
 <footer th:replace="base :: footer"></footer>

@@ -1,7 +1,7 @@
-let currenctPage = 0;
+let currentPage = 0;
 
 function showValues(page) {
-    currenctPage = page;
+    currentPage = page;
     const currency = document.getElementById("currency").value;
     const market = document.getElementById("market").value;
     const size = 10;
@@ -45,11 +45,11 @@ function showValues(page) {
             table.appendChild(tbody);
 
             const pagination = document.getElementById("pagination");
-            pagination.innerHTML = `<li class="page-item"><a class="page-link" href="#" onclick="showValues(${currenctPage - 1})">Previous</a></li>`;
+            pagination.innerHTML = `<li class="page-item"><a class="page-link" href="#" onclick="showValues(${currentPage - 1})">Previous</a></li>`;
             for (let i = 0; i < data.totalPages; i++) {
-                pagination.innerHTML += `<li class="page-item"><a class="page-link" href="#" id="${'page' + (i+1)}" onclick="showValues(${i})">${i+1}</a></li>`;
+                pagination.innerHTML += `<li class="page-item" id="${'page' + (i+1)}"><a class="page-link" href="#" onclick="showValues(${i})">${i+1}</a></li>`;
             }
-            pagination.innerHTML += `<li class="page-item"><a class="page-link" href="#" onclick="showValues(${currenctPage + 1})">Next</a></li>`;
+            pagination.innerHTML += `<li class="page-item"><a class="page-link" href="#" onclick="showValues(${currentPage + 1})">Next</a></li>`;
         })
         .catch(error => console.error(error));
 }
@@ -83,7 +83,7 @@ function saveValue() {
 
     fetch('/api/value/admin/save', options)
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => {window.location.href = "/admin/value";})
         .catch(error => console.log(error));
 }
 

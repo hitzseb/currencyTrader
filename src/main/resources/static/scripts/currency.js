@@ -17,7 +17,7 @@ function saveCurrency() {
 
     fetch('/api/currency/admin/save', options)
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => {window.location.href = "/admin/currency";})
         .catch(error => console.log(error));
 }
 

@@ -7,13 +7,9 @@ import com.hitzseb.currencyTrader.service.CurrencyService;
 import com.hitzseb.currencyTrader.service.CurrencyValueService;
 import com.hitzseb.currencyTrader.service.MarketService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.awt.print.Pageable;
 
 @Controller
 @RequiredArgsConstructor
