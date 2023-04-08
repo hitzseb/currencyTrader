@@ -3,6 +3,7 @@ package com.hitzseb.currencyTrader.controller;
 import com.hitzseb.currencyTrader.response.ValueResponse;
 import com.hitzseb.currencyTrader.service.CurrentValueService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,9 @@ public class CurrentValueController {
                     " Otherwise, it returns the current value of the specified currency in the specified market.")
     @GetMapping("/api/current")
     public ResponseEntity<?> getCurrentValue(
+            @Parameter(description = "Currency iso code")
             @RequestParam("currency") Optional<String> currencyCode,
+            @Parameter(description = "Market code: e.g. ARG")
             @RequestParam("market") Optional<String> marketCode) {
         if (!currencyCode.isPresent()) {
             return ResponseEntity.badRequest().body("Parameter currency is missing.");

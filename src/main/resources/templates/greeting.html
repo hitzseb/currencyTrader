@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:replace th:fragment="common-css" th:replace="base :: common-css"></th:replace>
+    <title>Greetings</title>
+</head>
+<body>
+
+<header th:replace="base :: header"></header>
+
+<div class="container-fluid py-5">
+    <div class="jumbotron my-5 text-center">
+        <h1 class="display-4">Welcome to currencyTrader!</h1>
+        <p class="lead">Thank you for signing up. Now you can log in and access the API.</p>
+        <hr class="my-4">
+        <p>Redirect to login page.</p>
+        <a class="btn btn-primary btn-lg" href="/login" role="button">Redirect</a>
+    </div>
+</div>
+
+<footer th:replace="base :: footer"></footer>
+
+<th:replace th:fragment="scripts" th:replace="base :: scripts"></th:replace>
+</body>
+</html>

@@ -43,7 +43,7 @@ public class MainUiController {
             return "register";
         }
         userService.signUpUser(user);
-        return "redirect:/";
+        return "greeting";
     }
 
     @GetMapping("/login")
