@@ -1,7 +1,10 @@
 :root {
-    --custom-black: #111;
-    --custom-blue: #1b80d6;
-    --custom-green: #0a879e;
+    --custom-dark-black: #111;
+    --custom-light-black: #333;
+    --custom-dark-blue: #1b80d6;
+    --custom-light-blue: #1B80D6BF;
+    --custom-dark-green: #0a879e;
+    --custom-light-green: #0A879EBE;
 }
 
 .background {
@@ -9,27 +12,45 @@
 }
 
 #header.navbar {
-    background-color: var(--custom-black) !important;
+    background-color: var(--custom-dark-black) !important;
 }
 
 #footer.navbar {
-    background-color: var(--custom-black) !important;
+    background-color: var(--custom-dark-black) !important;
 }
 
 .btn-dark {
-    background-color: var(--custom-black) !important;
-    border-color: var(--custom-black) !important;
+    background-color: var(--custom-dark-black) !important;
+    border-color: var(--custom-dark-black) !important;
+}
+
+.btn-dark:hover,
+.btn-dark:active {
+    background-color: var(--custom-light-black) !important;
 }
 
 .btn-primary {
-    background-color: var(--custom-blue) !important;
-    border-color: var(--custom-blue) !important;
+    background-color: var(--custom-dark-blue) !important;
+    border-color: var(--custom-dark-blue) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+    background-color: var(--custom-light-blue) !important;
+    border-color: var(--custom-light-blue) !important;
 }
 
 .btn-success {
-    background-color: var(--custom-green) !important;
-    border-color: var(--custom-green) !important;
+    background-color: var(--custom-dark-green) !important;
+    border-color: var(--custom-dark-green) !important;
 }
+
+.btn-success:hover,
+.btn-success:active {
+    background-color: var(--custom-light-green) !important;
+    border-color: var(--custom-light-green) !important;
+}
+
 
 .custom-animation {
     animation-name: drop !important;
