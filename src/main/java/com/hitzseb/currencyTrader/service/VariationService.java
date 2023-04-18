@@ -7,6 +7,7 @@ import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.model.CurrencyValue;
 import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.response.VariationResponse;
+import com.hitzseb.currencyTrader.util.EntityUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,19 +30,15 @@ public class VariationService {
             int pageNumber,
             int pageSize)
             throws EntityNotFoundException {
-        Currency currency;
-        currency = currencyService.getCurrencyByCode(currencyCode)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "Currency not found with code " + currencyCode));
+        Currency currency = EntityUtil.getEntityOrThrow(currencyService.getCurrencyByCode(currencyCode), "Currency");
+
         CurrencyDto currencyDto = new CurrencyDto(
                 currency.getName(),
                 currencyCode,
                 currency.getSymbol());
 
-        Market market;
-        market = marketService.getMarketByCode(marketCode)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "Market not found with id " + marketCode));
+        Market market = EntityUtil.getEntityOrThrow(marketService.getMarketByCode(marketCode), "Market");
+
         Currency marketCurrency = market.getCurrency();
         String marketCurrencyName = marketCurrency.getName();
         String marketCurrencyCode = marketCurrency.getCode();
@@ -61,9 +58,8 @@ public class VariationService {
         int toIndex = Math.min(pageNumber * pageSize, values.size());
         List<RegisteredValueDto> pagedValues = values.subList(fromIndex, toIndex);
 
-        VariationResponse variation = new VariationResponse(currencyDto, marketDto,
+        return new VariationResponse(currencyDto, marketDto,
                 printVariation(calculateExchangeRateVariation(currency, market, registeredAt)), pagedValues);
-        return variation;
     }
 
     public String printVariation(double variation) {

@@ -6,6 +6,7 @@ import com.hitzseb.currencyTrader.enums.Operation;
 import com.hitzseb.currencyTrader.model.Currency;
 import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.response.ExchangeResponse;
+import com.hitzseb.currencyTrader.util.EntityUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,10 +25,7 @@ public class ExchangeService {
             String currencyToCode,
             double amount)
             throws EntityNotFoundException {
-        Market market;
-        market = marketService.getMarketByCode(marketCode)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "Market not found with code: " + marketCode));
+        Market market = EntityUtil.getEntityOrThrow(marketService.getMarketByCode(marketCode), "Market");
         Currency marketCurrency = market.getCurrency();
         String marketCurrencyName = marketCurrency.getName();
         String marketCurrencyCode = marketCurrency.getCode();
@@ -41,33 +39,11 @@ public class ExchangeService {
                 marketCode,
                 marketCurrencyDto);
 
-        Currency currencyFrom;
-        currencyFrom = currencyService.getCurrencyByCode(currencyFromCode)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        "Currency not found with code: " + currencyFromCode));
+        Currency currencyFrom = EntityUtil.getEntityOrThrow(currencyService.getCurrencyByCode(currencyFromCode), "Currency");
 
-        Currency currencyTo;
-        currencyTo = currencyService.getCurrencyByCode(currencyToCode)
-                .orElseThrow(() -> new EntityNotFoundException(
-                "Currency not found with code: " + currencyToCode));
+        Currency currencyTo = EntityUtil.getEntityOrThrow(currencyService.getCurrencyByCode(currencyToCode), "Currency");
 
-        double currencyFromValue = 1;
-
-        if (marketCurrency != currencyFrom) {
-            if (operation == Operation.PURCHASE) {
-                currencyFromValue = currencyValueService
-                        .getActiveValueOfCurrencyInMarket(
-                                currencyFrom,
-                                market)
-                        .getPurchaseValue();
-            } else if (operation == Operation.SALE) {
-                currencyFromValue = currencyValueService
-                        .getActiveValueOfCurrencyInMarket(
-                                currencyFrom,
-                                market)
-                        .getSaleValue();
-            }
-        }
+        double currencyFromValue = getCurrencyValue(operation, currencyFrom, market);
 
         CurrencyDto currencyFromDto = new CurrencyDto(
                 currencyFrom.getName(),
@@ -76,23 +52,7 @@ public class ExchangeService {
 
         double convertedCurrencyFrom = amount * currencyFromValue;
 
-        double currencyToValue = 1;
-
-        if (marketCurrency != currencyTo) {
-            if (operation == Operation.PURCHASE) {
-                currencyToValue = currencyValueService
-                        .getActiveValueOfCurrencyInMarket(
-                                currencyTo,
-                                market)
-                        .getPurchaseValue();
-            } else if (operation == Operation.SALE) {
-                currencyToValue = currencyValueService
-                        .getActiveValueOfCurrencyInMarket(
-                                currencyTo,
-                                market)
-                        .getSaleValue();
-            }
-        }
+        double currencyToValue = getCurrencyValue(operation, currencyTo, market);
 
         CurrencyDto currencyToDto = new CurrencyDto(
                 currencyTo.getName(),
@@ -101,7 +61,7 @@ public class ExchangeService {
 
         double convertedCurrencyTo = convertedCurrencyFrom / currencyToValue;
 
-        ExchangeResponse exchangeResponse = new ExchangeResponse(
+        return new ExchangeResponse(
                 operation.name(),
                 marketDto,
                 currencyFromDto,
@@ -110,7 +70,21 @@ public class ExchangeService {
                 currencyToValue,
                 currencyFromCode + currencyFrom.getSymbol() + amount,
                 currencyToCode + currencyTo.getSymbol() + convertedCurrencyTo);
+    }
 
-        return exchangeResponse;
+    private double getCurrencyValue(Operation operation, Currency currency, Market market) {
+        if (market.getCurrency() == currency) {
+            return 1;
+        }
+
+        if (operation == Operation.PURCHASE) {
+            return currencyValueService.getActiveValueOfCurrencyInMarket(currency, market)
+                    .getPurchaseValue();
+        } else if (operation == Operation.SALE) {
+            return currencyValueService.getActiveValueOfCurrencyInMarket(currency, market)
+                    .getSaleValue();
+        }
+
+        return 1;
     }
 }

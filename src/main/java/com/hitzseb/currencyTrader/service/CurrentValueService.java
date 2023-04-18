@@ -3,9 +3,9 @@ package com.hitzseb.currencyTrader.service;
 import com.hitzseb.currencyTrader.dto.CurrencyDto;
 import com.hitzseb.currencyTrader.dto.MarketDto;
 import com.hitzseb.currencyTrader.model.Currency;
-import com.hitzseb.currencyTrader.model.CurrencyValue;
 import com.hitzseb.currencyTrader.model.Market;
 import com.hitzseb.currencyTrader.response.ValueResponse;
+import com.hitzseb.currencyTrader.util.EntityUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,14 +21,8 @@ public class CurrentValueService {
             String currencyCode,
             String marketCode)
             throws EntityNotFoundException {
-        Currency currency;
-        currency = currencyService.getCurrencyByCode(currencyCode)
-                .orElseThrow(() -> new EntityNotFoundException(
-                "Currency not found with code: " + currencyCode));
-        Market market;
-        market = marketService.getMarketByCode(marketCode)
-                .orElseThrow(() -> new EntityNotFoundException(
-                "Market not found with code: " + marketCode));
+        Currency currency = EntityUtil.getEntityOrThrow(currencyService.getCurrencyByCode(currencyCode), "Currency");
+        Market market =  EntityUtil.getEntityOrThrow(marketService.getMarketByCode(marketCode), "Market");
         Currency marketCurrency = market.getCurrency();
         String marketCurrencyName = marketCurrency.getName();
         String marketCurrencyCode = marketCurrency.getCode();
@@ -54,10 +48,9 @@ public class CurrentValueService {
                 market.getName(),
                 marketCode,
                 marketCurrencyDto);
-        ValueResponse response = new ValueResponse(
+        return new ValueResponse(
                 currencyDto,
                 marketDto,
                 marketCurrencyCode + marketCurrencySymbol + currencyValue);
-        return response;
     }
 }

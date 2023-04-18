@@ -28,18 +28,9 @@ public class MarketService {
         return marketRepository.findAll();
     }
 
-    public boolean marketCodeExists(String code) {
-        return marketCodeExists(code, null);
-    }
-
-    public boolean marketCodeExists(String code, Long id) {
-        Market market = marketRepository.findMarketByCode(code).orElse(null);
-        return ((market != null) && (id == null || !market.getId().equals(id)));
-    }
-
     public Market saveMarket(Market market) throws IllegalArgumentException {
-        if (!(market instanceof Market)) {
-            throw new IllegalArgumentException("The object market must be an instance of the class Market.");
+        if (market == null) {
+            throw new IllegalArgumentException("The object market cant be null.");
         }
         return marketRepository.save(market);
     }
@@ -52,12 +43,8 @@ public class MarketService {
         Market market = marketRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Market not found with id: " + id));
-        if (name.isPresent()) {
-            market.setName(name.get());
-        }
-        if (code.isPresent()) {
-            market.setCode(code.get());
-        }
+        name.ifPresent(market::setName);
+        code.ifPresent(market::setCode);
         if (currencyCode.isPresent()) {
             Currency currency = currencyService.getCurrencyByCode(currencyCode.get())
                     .orElseThrow(() -> new EntityNotFoundException(
@@ -68,8 +55,7 @@ public class MarketService {
     }
 
     public void  deleteMarketById(Long id) throws EntityNotFoundException {
-        Market market;
-        market = marketRepository.findById(id)
+        marketRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(
                         "Market not found with id: " + id));
         marketRepository.deleteById(id);

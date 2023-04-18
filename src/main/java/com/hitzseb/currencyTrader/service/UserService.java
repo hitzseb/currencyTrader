@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
-    private static String USER_NOT_FOUND_MSG = "user with name %s not found";
+    private final String USER_NOT_FOUND_MSG = "user with name %s not found";
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
