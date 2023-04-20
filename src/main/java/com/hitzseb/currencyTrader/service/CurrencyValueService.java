@@ -87,18 +87,20 @@ public class CurrencyValueService {
                 (currency, market, registeredAt);
     }
 
-    public List<RegisteredValueDto> getAllValueDtoOfCurrencyInMarketSinceDate
-            (Currency currency, Market market, LocalDate registeredAt) {
-        List<CurrencyValueDto> rawValues = currencyValueRepository.findRegisteredAtAndSaleValueByCurrencyAndMarketAndRegisteredAtAfterOrderByRegisteredAt(
-                currency, market, registeredAt);
+    public Page<RegisteredValueDto> getAllValueDtoOfCurrencyInMarketSinceDate(
+            Pageable pageable, Currency currency, Market market, LocalDate registeredAt) {
 
-        return rawValues.stream().map(currencyValueDto -> {
+        Page<CurrencyValueDto> rawValues = currencyValueRepository
+                .findRegisteredAtAndSaleValueByCurrencyAndMarketAndRegisteredAtAfterOrderByRegisteredAtDesc(pageable, currency, market, registeredAt);
+
+        return rawValues.map(currencyValueDto -> {
             Currency base = market.getCurrency();
             LocalDate date = currencyValueDto.registeredAt();
             double saleValue = currencyValueDto.saleValue();
             String registeredAtStr = date.toString();
             String saleValueStr = base.getCode() + base.getSymbol() + saleValue;
             return new RegisteredValueDto(registeredAtStr, saleValueStr);
-        }).collect(Collectors.toList());
+        });
     }
+
 }

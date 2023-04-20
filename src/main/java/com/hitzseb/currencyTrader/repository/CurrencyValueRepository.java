@@ -19,9 +19,10 @@ public interface CurrencyValueRepository extends JpaRepository<CurrencyValue, Lo
     Page<CurrencyValue> findByCurrencyAndMarket(Pageable pageable, Currency currency, Market market);
     Optional<CurrencyValue> findByCurrencyAndMarketAndIsActiveIsTrue(Currency currency, Market market);
 
+
     List<CurrencyValue> findByCurrencyAndMarketAndRegisteredAtAfterOrderByRegisteredAt
             (Currency currency, Market market, LocalDate registeredAt);
 
-    List<CurrencyValueDto> findRegisteredAtAndSaleValueByCurrencyAndMarketAndRegisteredAtAfterOrderByRegisteredAt
-            (Currency currency, Market market, LocalDate registeredAt);
+    Page<CurrencyValueDto> findRegisteredAtAndSaleValueByCurrencyAndMarketAndRegisteredAtAfterOrderByRegisteredAtDesc
+            (Pageable pageable, Currency currency, Market market, LocalDate registeredAt);
 }

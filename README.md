@@ -28,13 +28,13 @@ This will remove any previously compiled files and dependencies, and should help
 The API provides the following endpoints:
 
 **/exchange**: This endpoint accepts the following parameters: an operation type, which can be either PURCHASE or SALE; a market code; a currency code for the currency being exchanged (currencyFrom); a currency code for the currency being received in the exchange (currencyTo); and an amount. The endpoint returns the converted currency and additional relevant data based on these parameters.  
-Example: [http://localhost:8080/api/v1/exchange?operation=SALE&market=ARG&from=ARS&to=USD&amount=38000](http://localhost:8080/api/v1/exchange?operation=SALE&market=ARG&from=ARS&to=USD&amount=38000)  
+Example: [http://localhost:8080/api/exchange?operation=SALE&market=ARG&from=ARS&to=USD&amount=38000](http://localhost:8080/api/exchange?operation=SALE&market=ARG&from=ARS&to=USD&amount=38000)  
 
 **/variation**: This endpoint accepts a currency code, a market code, and a date. It then returns the exchange rate variation for that currency in that market on the specified date, based on the values registered in the database. The returned value includes the historical records for that currency and market up to the specified date.  
-Example: [http://localhost:8080/api/v1/variation?currency=USD&market=ARG&date=2020-01-01](http://localhost:8080/api/v1/variation?currency=USD&market=ARG&date=2020-01-01)  
+Example: [http://localhost:8080/api/variation?currency=USD&market=ARG&date=2020-01-01](http://localhost:8080/api/variation?currency=USD&market=ARG&date=2020-01-01)  
 
 **/current**: This endpoint accepts a currency code and a market code. If either of these parameters is missing, the endpoint will return a bad request response. If the specified currency and market combination is not found, the endpoint will return a not found response. Otherwise, it returns the current value of the specified currency in the specified market.  
-Example: [http://localhost:8080/api/v1/current?currency=USD&market=ARG](http://localhost:8080/api/v1/current?currency=USD&market=ARG)
+Example: [http://localhost:8080/api/current?currency=USD&market=ARG](http://localhost:8080/api/current?currency=USD&market=ARG)
 
 It also has all the CRUD endpoints for currencies, markets and currencyValues. For any non GET request you need to have ADMIN authority.
 

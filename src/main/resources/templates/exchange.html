@@ -58,13 +58,17 @@
             <div class="text-center my-5">
                 <p class="display-4" id="result"></p>
             </div>
+            <div class="text-center my-5">
+                <p class="lead font-weight-bold" id="base"></p>
+                <p class="lead font-weight-bold" id="quote"></p>
+            </div>
         </div>
     </div>
 </div>
 
 <footer th:replace="base :: footer"></footer>
 
-<script th:src="@{/scripts/main-scripts.js}"></script>
+<script th:src="@{/scripts/exchange.js}"></script>
 
 <script th:replace="base :: scripts"></script>
 

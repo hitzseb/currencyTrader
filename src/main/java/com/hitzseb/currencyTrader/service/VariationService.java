@@ -10,10 +10,12 @@ import com.hitzseb.currencyTrader.response.VariationResponse;
 import com.hitzseb.currencyTrader.util.EntityUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -27,9 +29,11 @@ public class VariationService {
             String currencyCode,
             String marketCode,
             LocalDate registeredAt,
-            int pageNumber,
-            int pageSize)
+            int page,
+            int size)
             throws EntityNotFoundException {
+        Pageable pageable = PageRequest.of(page, size);
+
         Currency currency = EntityUtil.getEntityOrThrow(currencyService.getCurrencyByCode(currencyCode), "Currency");
 
         CurrencyDto currencyDto = new CurrencyDto(
@@ -46,20 +50,11 @@ public class VariationService {
         CurrencyDto marketCurrencyDto = new CurrencyDto(marketCurrencyName, marketCurrencyCode, marketCurrencySymbol);
         MarketDto marketDto = new MarketDto(market.getName(), marketCode, marketCurrencyDto);
 
-        List<RegisteredValueDto> values = currencyValueService
-                .getAllValueDtoOfCurrencyInMarketSinceDate(currency, market, registeredAt);
-        Collections.reverse(values);
-
-        if (pageNumber < 1) {
-            pageNumber = 1;
-        }
-
-        int fromIndex = (pageNumber - 1) * pageSize;
-        int toIndex = Math.min(pageNumber * pageSize, values.size());
-        List<RegisteredValueDto> pagedValues = values.subList(fromIndex, toIndex);
+        Page<RegisteredValueDto> values = currencyValueService
+                .getAllValueDtoOfCurrencyInMarketSinceDate(pageable, currency, market, registeredAt);
 
         return new VariationResponse(currencyDto, marketDto,
-                printVariation(calculateExchangeRateVariation(currency, market, registeredAt)), pagedValues);
+                printVariation(calculateExchangeRateVariation(currency, market, registeredAt)), values);
     }
 
     public String printVariation(double variation) {

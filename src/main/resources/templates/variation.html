@@ -35,7 +35,7 @@
                         <label for="date">Since when:</label>
                         <input class="form-control" type="date" id="date" name="date" required>
                     </div>
-                    <button class="btn btn-primary mt-3" type="button" onclick="variation()">Calculate variation</button>
+                    <button class="btn btn-primary mt-3" type="button" onclick="variation(0)">Calculate variation</button>
                 </form>
             </div>
         </div>
@@ -43,13 +43,22 @@
             <div class="text-center my-5">
                 <p class="display-4" id="result"></p>
             </div>
+            <div class="my-5">
+                <table class="table table-striped" id="table"></table>
+            </div>
+            <div class="my-5">
+                <table class="table table-striped" id="valueList"></table>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" id="pagination"></ul>
+                </nav>
+            </div>
         </div>
     </div>
 </div>
 
 <footer th:replace="base :: footer"></footer>
 
-<script th:src="@{/scripts/main-scripts.js}"></script>
+<script th:src="@{/scripts/variation.js}"></script>
 
 <script th:replace="base :: scripts"></script>
 
