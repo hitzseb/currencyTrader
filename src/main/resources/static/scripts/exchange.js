@@ -16,8 +16,10 @@ function exchange() {
             const base = document.getElementById("base");
             const quote = document.getElementById("quote");
 
-            base.innerHTML = "Base value = " + data.currencyFromMarketValue;
-            quote.innerHTML = "Quote value = " + data.currencyToMarketValue;
+            base.innerHTML = data.currencyFrom.name + " value in " + data.market.name + " = "
+                + data.market.currency.code + data.market.currency.symbol + data.currencyFromMarketValue;
+            quote.innerHTML = data.currencyTo.name + " value in " + data.market.name + " = "
+                + data.market.currency.code + data.market.currency.symbol + data.currencyToMarketValue;
 
         })
         .catch(error => console.error(error));
