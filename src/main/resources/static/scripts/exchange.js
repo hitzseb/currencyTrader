@@ -12,15 +12,6 @@ function exchange() {
         .then(data => {
             const result = document.getElementById("result");
             result.innerHTML = data.outputAmount;
-
-            const base = document.getElementById("base");
-            const quote = document.getElementById("quote");
-
-            base.innerHTML = data.currencyFrom.name + " value in " + data.market.name + " = "
-                + data.market.currency.code + data.market.currency.symbol + data.currencyFromMarketValue;
-            quote.innerHTML = data.currencyTo.name + " value in " + data.market.name + " = "
-                + data.market.currency.code + data.market.currency.symbol + data.currencyToMarketValue;
-
         })
         .catch(error => console.error(error));
 }

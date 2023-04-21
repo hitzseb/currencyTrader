@@ -11,57 +11,57 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-3 col-sm-12">
-            <div class="my-5">
-                <h3>Calculate exchange</h3>
-                <form class="my-3">
-                    <div class="form-group my-3">
-                        <select class="form-control" id="operation" name="operation" required>
-                            <option value="">Select an operation</option>
-                            <option value="PURCHASE">Purchase</option>
-                            <option value="SALE">Sale</option>
-                        </select>
-                    </div>
-                    <div class="form-group my-3">
-                        <select class="form-control" id="market" name="market" required>
-                            <option value="">Select a market</option>
-                            <th:block th:each="market : ${markets}">
-                                <option th:value="${market.code}" th:text="${market.name}"></option>
-                            </th:block>
-                        </select>
-                    </div>
-                    <div class="form-group my-3">
-                        <select class="form-control" id="from" name="from" required>
-                            <option value="">Select base currency</option>
-                            <th:block th:each="currency : ${currencies}">
-                                <option th:value="${currency.code}" th:text="${currency.name}"></option>
-                            </th:block>
-                        </select>
-                    </div>
-                    <div class="form-group my-3">
-                        <select class="form-control" id="to" name="to" required>
-                            <option value="">Select quote currency</option>
-                            <th:block th:each="currency : ${currencies}">
-                                <option th:value="${currency.code}" th:text="${currency.name}"></option>
-                            </th:block>
-                        </select>
-                    </div>
-                    <div class="form-group my-3">
-                        <label for="amount">Amount:</label>
-                        <input class="form-control" type="number" id="amount" name="amount">
-                    </div>
-                    <button class="btn btn-primary mt-3" type="button" onclick="exchange()">Calculate exchange</button>
-                </form>
+        <div class="col-lg-3 col-sm-12 mx-auto">
+            <div class="card shadow my-5">
+                <div class="card-body">
+            <h3 class="text-center">Calculate exchange</h3>
+            <form class="my-3">
+                <div class="form-group my-3">
+                    <select class="form-control" id="operation" name="operation" required>
+                        <option value="">Select an operation</option>
+                        <option value="PURCHASE">Purchase</option>
+                        <option value="SALE">Sale</option>
+                    </select>
+                </div>
+                <div class="form-group my-3">
+                    <select class="form-control" id="market" name="market" required>
+                        <option value="">Select a market</option>
+                        <th:block th:each="market : ${markets}">
+                            <option th:value="${market.code}" th:text="${market.name}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="form-group my-3">
+                    <select class="form-control" id="from" name="from" required>
+                        <option value="">Select base currency</option>
+                        <th:block th:each="currency : ${currencies}">
+                            <option th:value="${currency.code}" th:text="${currency.name}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="form-group my-3">
+                    <select class="form-control" id="to" name="to" required>
+                        <option value="">Select quote currency</option>
+                        <th:block th:each="currency : ${currencies}">
+                            <option th:value="${currency.code}" th:text="${currency.name}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="form-group my-3">
+                    <label for="amount">Amount:</label>
+                    <input class="form-control" type="number" id="amount" name="amount">
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary text-center mt-3" type="button" onclick="exchange()">Calculate exchange</button>
+                </div>
+            </form>
+                </div>
             </div>
         </div>
-        <div class="col col-lg-9 col-sm-12 vh-100 bg-light">
-            <div class="text-center my-5">
-                <p class="display-4" id="result"></p>
-            </div>
-            <div class="text-center my-5">
-                <p class="lead font-weight-bold" id="base"></p>
-                <p class="lead font-weight-bold" id="quote"></p>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col text-center mx-auto mt-3">
+            <p class="text-muted display-4" id="result"></p>
         </div>
     </div>
 </div>
